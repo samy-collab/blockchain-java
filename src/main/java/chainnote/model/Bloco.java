@@ -1,5 +1,6 @@
 package chainnote.model;
 
+import chainnote.hash.CalculadoraHash;
 import java.time.LocalDateTime;
 
 public class Bloco {
@@ -10,12 +11,22 @@ public class Bloco {
     private String hashAnterior;
     private String hashAtual;
 
-    public Bloco(int id, String conteudo, String hashAnterior, String hashAtual) {
+    public Bloco(
+            int id,
+            String conteudo,
+            String hashAnterior,
+            CalculadoraHash calculadoraHash
+    ) {
         this.id = id;
         this.timestamp = LocalDateTime.now();
         this.conteudo = conteudo;
         this.hashAnterior = hashAnterior;
-        this.hashAtual = hashAtual;
+        this.hashAtual = calcularHash(calculadoraHash);
+    }
+
+    public String calcularHash(CalculadoraHash calculadoraHash) {
+        String dados = id + timestamp.toString() + conteudo + hashAnterior;
+        return calculadoraHash.calcular(dados);
     }
 
     public int getId() {
