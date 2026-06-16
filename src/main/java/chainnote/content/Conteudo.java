@@ -1,4 +1,8 @@
 package chainnote.content;
 
-public class Conteudo {
+public interface Conteudo {
+
+    String obterDados();
+
+    String obterTipo();
 }

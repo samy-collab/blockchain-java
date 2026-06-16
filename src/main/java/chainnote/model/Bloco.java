@@ -1,19 +1,21 @@
 package chainnote.model;
 
+import chainnote.content.Conteudo;
 import chainnote.hash.CalculadoraHash;
+
 import java.time.LocalDateTime;
 
 public class Bloco {
 
     private int id;
     private LocalDateTime timestamp;
-    private String conteudo;
+    private Conteudo conteudo;
     private String hashAnterior;
     private String hashAtual;
 
     public Bloco(
             int id,
-            String conteudo,
+            Conteudo conteudo,
             String hashAnterior,
             CalculadoraHash calculadoraHash
     ) {
@@ -25,7 +27,12 @@ public class Bloco {
     }
 
     public String calcularHash(CalculadoraHash calculadoraHash) {
-        String dados = id + timestamp.toString() + conteudo + hashAnterior;
+        String dados = id
+                + timestamp.toString()
+                + conteudo.obterTipo()
+                + conteudo.obterDados()
+                + hashAnterior;
+
         return calculadoraHash.calcular(dados);
     }
 
@@ -37,7 +44,7 @@ public class Bloco {
         return timestamp;
     }
 
-    public String getConteudo() {
+    public Conteudo getConteudo() {
         return conteudo;
     }
 
@@ -54,7 +61,8 @@ public class Bloco {
         return "Bloco{" +
                 "id=" + id +
                 ", timestamp=" + timestamp +
-                ", conteudo='" + conteudo + '\'' +
+                ", tipo='" + conteudo.obterTipo() + '\'' +
+                ", conteudo='" + conteudo.obterDados() + '\'' +
                 ", hashAnterior='" + hashAnterior + '\'' +
                 ", hashAtual='" + hashAtual + '\'' +
                 '}';

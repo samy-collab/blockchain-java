@@ -1,5 +1,6 @@
 package chainnote.model;
 
+import chainnote.content.Conteudo;
 import chainnote.hash.CalculadoraHash;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class Blockchain {
         this.calculadoraHash = calculadoraHash;
     }
 
-    public void adicionarBloco(String conteudo) {
+    public void adicionarBloco(Conteudo conteudo) {
         int id = blocos.size() + 1;
         String hashAnterior = obterHashAnterior();
 
@@ -57,8 +58,7 @@ public class Blockchain {
         for (int i = 0; i < blocos.size(); i++) {
             Bloco blocoAtual = blocos.get(i);
 
-            String hashCalculado =
-                    blocoAtual.calcularHash(calculadoraHash);
+            String hashCalculado = blocoAtual.calcularHash(calculadoraHash);
 
             if (!blocoAtual.getHashAtual().equals(hashCalculado)) {
                 return false;
@@ -71,8 +71,7 @@ public class Blockchain {
             } else {
                 Bloco blocoAnterior = blocos.get(i - 1);
 
-                if (!blocoAtual.getHashAnterior()
-                        .equals(blocoAnterior.getHashAtual())) {
+                if (!blocoAtual.getHashAnterior().equals(blocoAnterior.getHashAtual())) {
                     return false;
                 }
             }
@@ -81,8 +80,3 @@ public class Blockchain {
         return true;
     }
 }
-
-//guarda os blocos em uma lista
-//define o id automaticamente
-//Lista todos os blocos
-//Usa 0 como o hash anterior do primeiro bloco
