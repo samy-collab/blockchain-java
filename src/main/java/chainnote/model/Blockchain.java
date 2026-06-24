@@ -2,6 +2,7 @@ package chainnote.model;
 
 import chainnote.content.Conteudo;
 import chainnote.hash.CalculadoraHash;
+import chainnote.validacao.ValidadorCadeia;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,28 +56,7 @@ public class Blockchain {
     }
 
     public boolean validarCadeia() {
-        for (int i = 0; i < blocos.size(); i++) {
-            Bloco blocoAtual = blocos.get(i);
-
-            String hashCalculado = blocoAtual.calcularHash(calculadoraHash);
-
-            if (!blocoAtual.getHashAtual().equals(hashCalculado)) {
-                return false;
-            }
-
-            if (i == 0) {
-                if (!blocoAtual.getHashAnterior().equals("0")) {
-                    return false;
-                }
-            } else {
-                Bloco blocoAnterior = blocos.get(i - 1);
-
-                if (!blocoAtual.getHashAnterior().equals(blocoAnterior.getHashAtual())) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        ValidadorCadeia validadorCadeia = new ValidadorCadeia(calculadoraHash);
+        return validadorCadeia.validar(blocos);
     }
 }
