@@ -36,6 +36,10 @@ public class Bloco {
         return calculadoraHash.calcular(dados);
     }
 
+    public void adulterarConteudo(Conteudo novoConteudo) {
+        this.conteudo = novoConteudo;
+    }
+
     public int getId() {
         return id;
     }

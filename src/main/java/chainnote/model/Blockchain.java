@@ -55,6 +55,17 @@ public class Blockchain {
         }
     }
 
+    public void adulterarBloco(int id, Conteudo novoConteudo) {
+        for (Bloco bloco : blocos) {
+            if (bloco.getId() == id) {
+                bloco.adulterarConteudo(novoConteudo);
+                return;
+            }
+        }
+
+        System.out.println("Bloco com id " + id + " não encontrado.");
+    }
+
     public boolean validarCadeia() {
         ValidadorCadeia validadorCadeia = new ValidadorCadeia(calculadoraHash);
         return validadorCadeia.validar(blocos);
