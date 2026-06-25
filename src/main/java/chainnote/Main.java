@@ -6,6 +6,8 @@ import chainnote.content.TransacaoConteudo;
 import chainnote.hash.CalculadoraHash;
 import chainnote.hash.SHA256Hash;
 import chainnote.model.Blockchain;
+import chainnote.persistencia.RepositorioCadeia;
+import chainnote.persistencia.RepositorioEmMemoria;
 
 import java.util.Scanner;
 
@@ -15,6 +17,7 @@ public class Main {
 
         CalculadoraHash calculadoraHash = new SHA256Hash();
         Blockchain blockchain = new Blockchain(calculadoraHash);
+        RepositorioCadeia repositorio = new RepositorioEmMemoria();
         Scanner scanner = new Scanner(System.in);
 
         int opcao;
