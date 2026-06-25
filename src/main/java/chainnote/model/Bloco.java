@@ -26,6 +26,20 @@ public class Bloco {
         this.hashAtual = calcularHash(calculadoraHash);
     }
 
+    public Bloco(
+            int id,
+            LocalDateTime timestamp,
+            Conteudo conteudo,
+            String hashAnterior,
+            String hashAtual
+    ) {
+        this.id = id;
+        this.timestamp = timestamp;
+        this.conteudo = conteudo;
+        this.hashAnterior = hashAnterior;
+        this.hashAtual = hashAtual;
+    }
+
     public String calcularHash(CalculadoraHash calculadoraHash) {
         String dados = id
                 + timestamp.toString()

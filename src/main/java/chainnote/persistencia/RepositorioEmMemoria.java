@@ -11,11 +11,29 @@ public class RepositorioEmMemoria implements RepositorioCadeia {
 
     @Override
     public void salvar(List<Bloco> blocos) {
-        this.blocosSalvos = new ArrayList<>(blocos);
+        this.blocosSalvos = copiarBlocos(blocos);
     }
 
     @Override
     public List<Bloco> carregar() {
-        return new ArrayList<>(blocosSalvos);
+        return copiarBlocos(blocosSalvos);
+    }
+
+    private List<Bloco> copiarBlocos(List<Bloco> blocos) {
+        List<Bloco> copias = new ArrayList<>();
+
+        for (Bloco bloco : blocos) {
+            Bloco copia = new Bloco(
+                    bloco.getId(),
+                    bloco.getTimestamp(),
+                    bloco.getConteudo(),
+                    bloco.getHashAnterior(),
+                    bloco.getHashAtual()
+            );
+
+            copias.add(copia);
+        }
+
+        return copias;
     }
 }

@@ -18,8 +18,8 @@ public class Main {
         CalculadoraHash calculadoraHash = new SHA256Hash();
         Blockchain blockchain = new Blockchain(calculadoraHash);
         RepositorioCadeia repositorio = new RepositorioEmMemoria();
-        Scanner scanner = new Scanner(System.in);
 
+        Scanner scanner = new Scanner(System.in);
         int opcao;
 
         do {
@@ -31,6 +31,8 @@ public class Main {
             System.out.println("4 - Listar blockchain");
             System.out.println("5 - Validar blockchain");
             System.out.println("6 - Adulterar bloco");
+            System.out.println("7 - Salvar blockchain");
+            System.out.println("8 - Carregar blockchain");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -92,6 +94,16 @@ public class Main {
 
                     blockchain.adulterarBloco(id, new NotaTexto(conteudoAdulterado));
                     System.out.println("Bloco adulterado.");
+                    break;
+
+                case 7:
+                    repositorio.salvar(blockchain.getBlocos());
+                    System.out.println("Blockchain salva em memória.");
+                    break;
+
+                case 8:
+                    blockchain.carregarBlocos(repositorio.carregar());
+                    System.out.println("Blockchain carregada da memória.");
                     break;
 
                 case 0:

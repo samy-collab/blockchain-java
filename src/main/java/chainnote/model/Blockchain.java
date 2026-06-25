@@ -66,6 +66,11 @@ public class Blockchain {
         System.out.println("Bloco com id " + id + " não encontrado.");
     }
 
+    public void carregarBlocos(List<Bloco> blocosCarregados) {
+        this.blocos.clear();
+        this.blocos.addAll(blocosCarregados);
+    }
+
     public boolean validarCadeia() {
         ValidadorCadeia validadorCadeia = new ValidadorCadeia(calculadoraHash);
         return validadorCadeia.validar(blocos);
