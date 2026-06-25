@@ -15,6 +15,14 @@
     </properties>
 
     <dependencies>
+        <!-- Biblioteca para salvar e carregar a blockchain em JSON -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+
+        <!-- Biblioteca para testes automatizados -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -25,10 +33,21 @@
 
     <build>
         <plugins>
+            <!-- Plugin para rodar os testes com JUnit -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
+            </plugin>
+
+            <!-- Plugin para executar o Main pelo Maven -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>chainnote.Main</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>

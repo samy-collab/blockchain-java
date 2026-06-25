@@ -7,7 +7,7 @@ import chainnote.hash.CalculadoraHash;
 import chainnote.hash.SHA256Hash;
 import chainnote.model.Blockchain;
 import chainnote.persistencia.RepositorioCadeia;
-import chainnote.persistencia.RepositorioEmMemoria;
+import chainnote.persistencia.RepositorioEmArquivoJson;
 
 import java.util.Scanner;
 
@@ -17,7 +17,8 @@ public class Main {
 
         CalculadoraHash calculadoraHash = new SHA256Hash();
         Blockchain blockchain = new Blockchain(calculadoraHash);
-        RepositorioCadeia repositorio = new RepositorioEmMemoria();
+
+        RepositorioCadeia repositorio = new RepositorioEmArquivoJson("blockchain.json");
 
         Scanner scanner = new Scanner(System.in);
         int opcao;
@@ -98,12 +99,12 @@ public class Main {
 
                 case 7:
                     repositorio.salvar(blockchain.getBlocos());
-                    System.out.println("Blockchain salva em memória.");
+                    System.out.println("Blockchain salva em blockchain.json.");
                     break;
 
                 case 8:
                     blockchain.carregarBlocos(repositorio.carregar());
-                    System.out.println("Blockchain carregada da memória.");
+                    System.out.println("Blockchain carregada de blockchain.json.");
                     break;
 
                 case 0:
